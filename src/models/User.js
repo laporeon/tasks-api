@@ -1,8 +1,9 @@
+const { hash } = require("bcrypt");
 const Sequelize = require("sequelize");
 const connection = require("../database/databaseConfig");
 
 const User = connection.define(
-  "users",
+  "User",
   {
     id: {
       type: Sequelize.UUID,
@@ -17,22 +18,34 @@ const User = connection.define(
         msg: "Username already in use.",
       },
       validate: {
-        notNull: {
-          msg: "Username must not be empty.",
-        },
         len: {
           args: [6, 20],
           msg: "Username must have between 6 and 20 characters.",
         },
       },
     },
-    password: {
+    password_hash: {
       type: Sequelize.STRING,
-      allowNull: false,
+      defaultValue: "",
+    },
+    password: {
+      type: Sequelize.VIRTUAL,
+      defaultValue: "",
+      validate: {
+        len: {
+          args: [8, 20],
+          msg: "Password must have between 8 and 20 characters.",
+        },
+      },
     },
   },
   {
-    tableName: "Users",
+    tableName: "users",
+    hooks: {
+      async beforeSave(user) {
+        if (user.password) user.password_hash = await hash(user.password, 8);
+      },
+    },
   }
 );
 

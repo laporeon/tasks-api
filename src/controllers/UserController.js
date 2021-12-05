@@ -1,7 +1,4 @@
-const { hash } = require("bcrypt");
-const { response } = require("express");
 const User = require("../models/User");
-
 class UserController {
   async list(req, res) {
     try {
@@ -19,11 +16,9 @@ class UserController {
   }
 
   async create(req, res) {
-    const { username, password } = req.body;
-    const passwordHash = await hash(password, 8);
-
     try {
-      const user = await User.create({ username, password: passwordHash });
+      const { username, password } = req.body;
+      const user = await User.create({ username, password });
       return res.status(201).json({ message: "User successfully created." });
     } catch (error) {
       return res
