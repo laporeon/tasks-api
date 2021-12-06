@@ -1,0 +1,80 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tasks API",
+    "description": "A sample API to control user tasks.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["User"],
+        "summary": "List users.",
+        "description": "List all users stored.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "date"
+                      },
+                      "updated_at": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a user.",
+        "description": "Create a new user, receiving a username and a password.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "username": "usernamesample",
+                  "password": "password123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Validation error."
+          }
+        }
+      }
+    }
+  }
+}
