@@ -10,7 +10,7 @@ const connection = require("./database/databaseConfig");
 const app = express();
 const port = process.env.PORT || 3000;
 
-const swaggerFile = require("./swagger.json");
+const swaggerFile = require("../swagger.json");
 
 app.use(cors());
 app.use(express.json());
