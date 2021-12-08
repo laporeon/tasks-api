@@ -9,11 +9,11 @@
     "/": {
       "get": {
         "tags": ["User"],
-        "summary": "List users.",
-        "description": "List all users stored.",
+        "summary": "Return users",
+        "description": "Return all users stored at database",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "A list of users",
             "content": {
               "application/json": {
                 "schema": {
@@ -74,11 +74,21 @@
             "description": "Validation error."
           }
         }
-      },
+      }
+    },
+    "/{id}": {
       "delete": {
         "tags": ["User"],
         "summary": "Delete a user.",
         "description": "Delete a user based on its primary key.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -98,10 +108,10 @@
         },
         "responses": {
           "200": {
-            "description": "User succesfully deleted."
+            "description": "OK"
           },
           "404": {
-            "description": "User not found."
+            "description": "Not Found"
           }
         }
       }
