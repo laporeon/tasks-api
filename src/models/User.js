@@ -1,17 +1,18 @@
 const { hash } = require("bcrypt");
-const Sequelize = require("sequelize");
-const connection = require("../database/databaseConfig");
+const { DataTypes } = require("sequelize");
+
+const connection = require("../config/databaseConfig");
 
 const User = connection.define(
   "User",
   {
     id: {
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
     username: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: {
         args: true,
@@ -25,11 +26,11 @@ const User = connection.define(
       },
     },
     password_hash: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       defaultValue: "",
     },
     password: {
-      type: Sequelize.VIRTUAL,
+      type: DataTypes.VIRTUAL,
       defaultValue: "",
       validate: {
         len: {
@@ -48,8 +49,5 @@ const User = connection.define(
     },
   }
 );
-
-User.sync({ force: true });
-console.log("Table for User model was just (re)created!");
 
 module.exports = User;
