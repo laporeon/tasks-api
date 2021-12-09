@@ -1,6 +1,8 @@
 const { hash } = require("bcrypt");
 const { DataTypes } = require("sequelize");
 
+const Task = require("../models/Task");
+
 const connection = require("../config/databaseConfig");
 
 const User = connection.define(
@@ -49,5 +51,9 @@ const User = connection.define(
     },
   }
 );
+
+User.hasMany(Task, {
+  foreignKey: "user_id",
+});
 
 module.exports = User;
