@@ -27,12 +27,8 @@ const User = connection.define(
         },
       },
     },
-    password_hash: {
-      type: DataTypes.STRING,
-      defaultValue: "",
-    },
     password: {
-      type: DataTypes.VIRTUAL,
+      type: DataTypes.STRING,
       defaultValue: "",
       validate: {
         len: {
@@ -46,7 +42,7 @@ const User = connection.define(
     tableName: "users",
     hooks: {
       async beforeSave(user) {
-        if (user.password) user.password_hash = await hash(user.password, 8);
+        if (user.password) user.password = await hash(user.password, 8);
       },
     },
   }
