@@ -9,7 +9,7 @@ connection
   .authenticate()
   .then(() => {
     console.log("Successfully connected with database.");
-    models.forEach((model) => connection.sync({ force: true }));
+    models.forEach((model) => connection.sync());
     console.log(`All tables were created`);
   })
   .catch((e) => console.log(e));
