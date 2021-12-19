@@ -13,7 +13,7 @@ routes.post("/", UserController.create);
 routes.delete("/:id", UserController.delete);
 
 routes.get("/tasks", ensureAuthenticated, TaskController.list);
-routes.post("/tasks", TaskController.create);
+routes.post("/tasks", ensureAuthenticated, TaskController.create);
 
 routes.post("/signin", TokenController.store);
 

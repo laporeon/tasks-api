@@ -2,7 +2,13 @@ const Task = require("../models/Task");
 class TaskController {
   async list(req, res) {
     try {
-      const tasks = await Task.findAll({});
+      const { userId } = req;
+      const tasks = await Task.findAll({
+        where: {
+          user_id: userId,
+        },
+        attributes: ["id", "name", "description", "status"],
+      });
 
       if (tasks.length <= 0)
         return res.status(404).json({ error: "No tasks found." });
@@ -18,7 +24,10 @@ class TaskController {
   async create(req, res) {
     try {
       const { name, description } = req.body;
-      const task = await Task.create({ name, description });
+      const { userId } = req;
+      console.log("userId do create Task", userId);
+
+      const task = await Task.create({ name, description, user_id: userId });
       return res.status(201).json({ message: "Task created." });
     } catch (error) {
       return res
