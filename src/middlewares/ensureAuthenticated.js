@@ -17,7 +17,7 @@ async function ensureAuthenticated(req, res, next) {
 
   // Verificando token
   try {
-    const { sub: user_id } = verify(token, process.env.SECRET);
+    const { sub: user_id } = verify(token, process.env.TOKEN_SECRET);
 
     const user = await User.findByPk(user_id);
 
