@@ -22,7 +22,7 @@ class TokenController {
           Errors: ["Username or password incorrect."],
         });
 
-      const token = sign({}, process.env.SECRET, {
+      const token = sign({}, process.env.TOKEN_SECRET, {
         subject: user.id,
         expiresIn: "1d",
       });
