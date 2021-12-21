@@ -17,8 +17,8 @@ const Task = connection.define(
       type: DataTypes.STRING,
     },
     status: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      type: DataTypes.STRING,
+      defaultValue: "pending",
     },
   },
   {
