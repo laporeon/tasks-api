@@ -14,6 +14,7 @@ routes.delete("/:id", UserController.delete);
 
 routes.get("/tasks", ensureAuthenticated, TaskController.list);
 routes.post("/tasks", ensureAuthenticated, TaskController.create);
+routes.delete("/tasks/:id", ensureAuthenticated, TaskController.delete);
 
 routes.post("/signin", TokenController.store);
 

@@ -197,6 +197,49 @@
           }
         }
       }
+    },
+    "/tasks/{id}": {
+      "delete": {
+        "tags": ["Task"],
+        "summary": "Delete a task.",
+        "description": "Delete a task based on its primary key.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "id": "8c5a-1e27c"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
     }
   }
 }
