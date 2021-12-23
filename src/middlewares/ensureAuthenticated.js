@@ -24,8 +24,6 @@ async function ensureAuthenticated(req, res, next) {
     if (!user)
       return res.status(404).json({ error: "User invalid or not found." });
 
-    console.log("user id do middleware: ", user_id);
-
     req.userId = user_id;
     return next();
   } catch (error) {
