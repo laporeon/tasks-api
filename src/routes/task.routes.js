@@ -2,8 +2,6 @@ const { Router } = require("express");
 
 const taskRoutes = Router();
 
-const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
-
 const TaskController = require("../controllers/TaskController");
 
 taskRoutes.get("/", TaskController.list);
