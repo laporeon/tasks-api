@@ -25,7 +25,6 @@ class TaskController {
     try {
       const { name, description } = req.body;
       const { userId } = req;
-      console.log("userId do create Task", userId);
 
       const task = await Task.create({ name, description, user_id: userId });
       return res.status(201).json({ message: "Task created." });
