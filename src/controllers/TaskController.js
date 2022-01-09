@@ -1,4 +1,5 @@
 const Task = require("../models/Task");
+const User = require("../models/User");
 class TaskController {
   async list(req, res) {
     try {
