@@ -1,29 +1,38 @@
-const { DataTypes } = require("sequelize");
-const connection = require("../config/databaseConfig");
+const { Sequelize, Model } = require("sequelize");
 
-const Task = connection.define(
-  "Task",
-  {
-    id: {
-      type: DataTypes.UUID,
-      primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING,
-    },
-    status: {
-      type: DataTypes.STRING,
-      defaultValue: "pending",
-    },
-  },
-  {
-    tableName: "tasks",
+class Task extends Model {
+  static init(sequelize) {
+    super.init(
+      {
+        id: {
+          type: Sequelize.UUID,
+          primaryKey: true,
+          defaultValue: Sequelize.UUIDV4,
+        },
+        user_id: {
+          type: Sequelize.UUID,
+          defaultValue: "",
+        },
+        name: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        description: {
+          type: Sequelize.STRING,
+        },
+        status: {
+          type: Sequelize.STRING,
+          defaultValue: "pending",
+        },
+      },
+      { sequelize }
+    );
+
+    return this;
   }
-);
+  static associate(models) {
+    this.belongsTo(models.User);
+  }
+}
 
 module.exports = Task;

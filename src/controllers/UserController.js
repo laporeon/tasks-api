@@ -2,7 +2,9 @@ const User = require("../models/User");
 class UserController {
   async list(req, res) {
     try {
-      const users = await User.findAll({});
+      const users = await User.findAll({
+        attributes: ["id", "username", "created_at"],
+      });
 
       if (users.length <= 0)
         return res.status(404).json({ error: "No users found." });
