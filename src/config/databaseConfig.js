@@ -1,15 +1,21 @@
 require("dotenv").config();
-const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize(
-  process.env.DATABASE,
-  process.env.DATABASE_USERNAME,
-  process.env.DATABASE_PASSWORD,
-  {
-    host: "localhost",
-    dialect: "mysql",
-    logging: false,
-  }
-);
-
-module.exports = sequelize;
+module.exports = {
+  dialect: process.env.DATABASE_DIALECT,
+  host: process.env.DATABASE_HOST,
+  username: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE,
+  port: process.env.DATABASE_PORT,
+  define: {
+    timestamps: true,
+    underscored: true,
+    underscoredAll: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+  },
+  dialectOptions: {
+    useUTC: false,
+  },
+  timezone: "-03:00",
+};
