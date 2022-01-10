@@ -7,7 +7,7 @@
   },
   "tags": [],
   "paths": {
-    "/": {
+    "/user": {
       "get": {
         "tags": ["User"],
         "summary": "Return users",
@@ -75,7 +75,7 @@
         }
       }
     },
-    "/{id}": {
+    "/user/{id}": {
       "delete": {
         "tags": ["User"],
         "summary": "Delete a user.",
